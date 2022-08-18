@@ -86,7 +86,7 @@ export default defineConfig({
       pagesDir: [
         {
           dir: "src/pages",
-          baseRoute: "/jlog.github.io/",
+          baseRoute: "",
         },
         {
           dir: "posts",
