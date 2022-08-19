@@ -19,7 +19,7 @@ import toc from "markdown-it-table-of-contents";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/",
+  base: "./",
   build: {
     rollupOptions: {
       input: {
