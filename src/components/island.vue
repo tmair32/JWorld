@@ -14,7 +14,7 @@ import {
 
 import * as GUI from "@babylonjs/gui";
 
-const islandRef: HTMLCanvasElement = ref(null);
+const islandRef = ref<HTMLCanvasElement>(null);
 
 const drawIsland = (scene: Scene, camera: ArcRotateCamera) => {
   const Island = SceneLoader.ImportMesh(
