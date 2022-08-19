@@ -25,14 +25,26 @@ const drawIsland = (scene: Scene, camera: ArcRotateCamera) => {
   );
 };
 
-const drawTooltip = (scene) => {
-  const drawText = (mesh: Mesh) => {
-    console.log(mesh);
+const drawBlogTooltip = (scene) => {
+  const drawFrontText = (mesh: Mesh) => {
     const plane = Mesh.CreatePlane("plane", 2);
     plane.parent = mesh;
-    plane.position.x = 0.01;
-    plane.position.y = 1.4;
-    plane.position.z = -0.05;
+    plane.position = new Vector3(0.01, 1.4, -0.05);
+
+    const advancedTexture = GUI.AdvancedDynamicTexture.CreateForMesh(plane);
+
+    const button = GUI.Button.CreateSimpleButton("btn", "Blog");
+    button.width = 0.15;
+    button.height = 0.15;
+    button.fontSize = 50;
+    button.alpha = 0.3;
+    advancedTexture.addControl(button);
+  };
+  const drawBackwardText = (mesh: Mesh) => {
+    const plane = Mesh.CreatePlane("plane", 2);
+    plane.parent = mesh;
+    plane.position = new Vector3(0.01, 1.4, 0.02);
+    plane.rotation = new Vector3(0, Math.PI, 0);
 
     const advancedTexture = GUI.AdvancedDynamicTexture.CreateForMesh(plane);
 
@@ -50,7 +62,8 @@ const drawTooltip = (scene) => {
     "scene.gltf",
     scene,
     (meshes) => {
-      drawText(meshes[0]);
+      drawFrontText(meshes[0]);
+      drawBackwardText(meshes[0]);
       for (let mesh of meshes) {
         mesh.scaling = new Vector3(0.3, 0.3, 0.3);
         mesh.position = new Vector3(-0.06, 0.625, -0.75);
@@ -81,7 +94,7 @@ onMounted(() => {
   camera.useFramingBehavior = true;
 
   drawIsland(scene, camera);
-  drawTooltip(scene);
+  drawBlogTooltip(scene);
 
   scene.createDefaultEnvironment();
 });
