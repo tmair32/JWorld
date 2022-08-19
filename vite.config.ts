@@ -19,6 +19,14 @@ import toc from "markdown-it-table-of-contents";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/",
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "index.html"),
+      },
+    },
+  },
   define: {
     "process.env": process.env,
   },
@@ -86,7 +94,7 @@ export default defineConfig({
       pagesDir: [
         {
           dir: "src/pages",
-          baseRoute: "",
+          baseRoute: "/",
         },
         {
           dir: "posts",
