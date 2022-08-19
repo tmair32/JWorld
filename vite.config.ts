@@ -94,7 +94,7 @@ export default defineConfig({
       pagesDir: [
         {
           dir: "src/pages",
-          baseRoute: "/",
+          baseRoute: "/main",
         },
         {
           dir: "posts",
