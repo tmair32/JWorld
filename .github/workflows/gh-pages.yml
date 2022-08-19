@@ -1,42 +1,38 @@
-name: gh-pages
+name: GitHub Pages
 
 on:
   push:
     branches:
-      - master
+      - main  # Set a branch name to trigger deployment
+  pull_request:
 
 jobs:
-  gh-pages:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
         with:
-          node-version: 16.x
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
-      - name: Install pnpm
-        run: npm install --global pnpm
-
-      - name: Cache .pnpm-store
-        uses: actions/cache@v2
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-      - name: Install dependencies
-        run: pnpm install
+          hugo-version: '0.85.0'
 
-      - name: Build VuePress site
-        run: pnpm build
+      - name: Build
+        run: hugo --minify
 
-      - name: Copy README.md
-        run: cp README.md dist
-
-      - name: Deploy GitHub Pages
-        uses: tmair32/actions-gh-pages@v3
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        # If you're changing the branch from main, 
+        # also change the `main` in `refs/heads/main` 
+        # below accordingly.
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
-          github_token: ${{ secrets.GH_ACTIONS_TOKEN }}
-          publish_dir: dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
