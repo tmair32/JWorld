@@ -19,7 +19,7 @@ const islandRef = ref<HTMLCanvasElement>(null);
 const drawIsland = (scene: Scene, camera: ArcRotateCamera) => {
   const Island = SceneLoader.ImportMesh(
     "",
-    import.meta.env.BASE_URL + "assets/island/fantasy_eco_city/",
+    import.meta.env.BASE_URL + "island/fantasy_eco_city/",
     "scene.gltf",
     scene
   );
@@ -58,7 +58,7 @@ const drawBlogTooltip = (scene) => {
 
   const tooltip = SceneLoader.ImportMesh(
     "",
-    import.meta.env.BASE_URL + "assets/arctic_tooltip/",
+    import.meta.env.BASE_URL + "arctic_tooltip/",
     "scene.gltf",
     scene,
     (meshes) => {

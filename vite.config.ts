@@ -19,13 +19,10 @@ import toc from "markdown-it-table-of-contents";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  assetsInclude: ["**/*.gltf"],
   base: "./",
   build: {
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, "index.html"),
-      },
-    },
+    chunkSizeWarningLimit: 1600,
   },
   define: {
     "process.env": process.env,
@@ -94,7 +91,7 @@ export default defineConfig({
       pagesDir: [
         {
           dir: "src/pages",
-          baseRoute: "/main",
+          baseRoute: "/",
         },
         {
           dir: "posts",
