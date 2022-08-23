@@ -1,7 +1,8 @@
 {
   "name": "jworld",
-  "private": false,
+  "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "cross-env NODE_ENV=production vite-ssg build",
