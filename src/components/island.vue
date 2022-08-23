@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import "@babylonjs/loaders";
 import {
+  ActionManager,
   ArcRotateCamera,
+  DynamicTexture,
   Engine,
+  InterpolateValueAction,
   Mesh,
   MeshBuilder,
   PointLight,
   Scene,
   SceneLoader,
-  StandardMaterial,
+  Texture,
   Vector3,
 } from "@babylonjs/core";
 
@@ -25,35 +28,43 @@ const drawIsland = (scene: Scene, camera: ArcRotateCamera) => {
   );
 };
 
-const drawBlogTooltip = (scene) => {
-  const drawFrontText = (mesh: Mesh) => {
-    const plane = Mesh.CreatePlane("plane", 2);
-    plane.parent = mesh;
-    plane.position = new Vector3(0.01, 1.4, -0.05);
-
-    const advancedTexture = GUI.AdvancedDynamicTexture.CreateForMesh(plane);
-
-    const button = GUI.Button.CreateSimpleButton("btn", "Blog");
-    button.width = 0.15;
-    button.height = 0.15;
-    button.fontSize = 50;
-    button.alpha = 0.3;
-    advancedTexture.addControl(button);
+const drawBlogTooltip = (scene: Scene, highlight: HighlightLayer) => {
+  const tooltipEvent = (mesh: Mesh) => {
+    mesh.actionManager = new ActionManager(scene);
+    mesh.actionManager.registerAction(
+      new InterpolateValueAction(
+        ActionManager.OnPointerOverTrigger,
+        mesh,
+        "scaling",
+        new Vector3(0.4, 0.4, 0.4),
+        500
+      )
+    );
+    mesh.actionManager.registerAction(
+      new InterpolateValueAction(
+        ActionManager.OnPointerOutTrigger,
+        mesh,
+        "scaling",
+        new Vector3(0.3, 0.3, 0.3),
+        500
+      )
+    );
   };
-  const drawBackwardText = (mesh: Mesh) => {
-    const plane = Mesh.CreatePlane("plane", 2);
-    plane.parent = mesh;
-    plane.position = new Vector3(0.01, 1.4, 0.02);
-    plane.rotation = new Vector3(0, Math.PI, 0);
 
-    const advancedTexture = GUI.AdvancedDynamicTexture.CreateForMesh(plane);
+  const tooltipText = (mesh: Mesh, text: text) => {
+    const font = "bold 50px serif";
+    const textureResolution = 512;
+    const textureGround = new DynamicTexture(
+      "dynamic texture",
+      textureResolution,
+      scene,
+      true
+    );
+    textureGround.hasAlpha = true;
+    textureGround.uAng = Math.PI;
+    textureGround.drawText(text, 208, 330, font, "#000", "#fff", true, true);
 
-    const button = GUI.Button.CreateSimpleButton("btn", "Blog");
-    button.width = 0.15;
-    button.height = 0.15;
-    button.fontSize = 50;
-    button.alpha = 0.3;
-    advancedTexture.addControl(button);
+    mesh.material.albedoTexture = textureGround;
   };
 
   const tooltip = SceneLoader.ImportMesh(
@@ -62,8 +73,12 @@ const drawBlogTooltip = (scene) => {
     "scene.gltf",
     scene,
     (meshes) => {
-      drawFrontText(meshes[0]);
-      drawBackwardText(meshes[0]);
+      const rootMesh = meshes[0];
+      const tooltipMesh = meshes[1];
+
+      tooltipText(tooltipMesh, "Blog");
+      tooltipEvent(tooltipMesh);
+
       for (let mesh of meshes) {
         mesh.scaling = new Vector3(0.3, 0.3, 0.3);
         mesh.position = new Vector3(-0.06, 0.625, -0.75);
