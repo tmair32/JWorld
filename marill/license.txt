@@ -1,0 +1,11 @@
+Model Information:
+* title:	Marill
+* source:	https://sketchfab.com/3d-models/marill-503025b73f774098aa8b42a316e4b4b4
+* author:	nguyenlouis32 (https://sketchfab.com/nguyenlouis32)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Marill" (https://sketchfab.com/3d-models/marill-503025b73f774098aa8b42a316e4b4b4) by nguyenlouis32 (https://sketchfab.com/nguyenlouis32) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
