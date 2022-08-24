@@ -3,6 +3,8 @@ import "@babylonjs/loaders";
 import { ArcRotateCamera, Engine, Scene, Vector3 } from "@babylonjs/core";
 import { drawBlogTooltip } from "~/babylon/tooltip";
 import { drawIsland, drawWaterIsland } from "~/babylon/island";
+import { drawMarill } from "~/babylon/marill";
+import { drawPikachu } from "~/babylon/Pikachu";
 
 import * as GUI from "@babylonjs/gui";
 
@@ -32,6 +34,8 @@ onMounted(() => {
   drawIsland(scene);
   drawWaterIsland(scene);
   drawBlogTooltip(scene);
+  drawMarill(scene);
+  drawPikachu(scene);
 
   scene.createDefaultEnvironment();
 });

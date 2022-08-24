@@ -12,7 +12,8 @@ export const drawIsland = (scene: Scene) => {
 export const drawWaterIsland = (scene: Scene) => {
   const Island = SceneLoader.ImportMesh(
     "",
-    import.meta.env.BASE_URL + "island/water_island/",
+    // import.meta.env.BASE_URL + "island/water_island/",
+    import.meta.env.VITE_CDN_URL + "island/water_island/",
     "scene.gltf",
     scene,
     (meshes: AbstractMesh[]) => {

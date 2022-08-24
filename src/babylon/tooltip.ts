@@ -61,7 +61,7 @@ const drawBlogTooltip = (scene: Scene) => {
 
   SceneLoader.ImportMesh(
     "",
-    import.meta.env.BASE_URL + "arctic_tooltip/",
+    import.meta.env.VITE_CDN_URL + "arctic_tooltip/",
     "scene.gltf",
     scene,
     (meshes: AbstractMesh[]) => {
