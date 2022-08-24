@@ -3,7 +3,7 @@ import { AbstractMesh, Scene, SceneLoader, Vector3 } from "@babylonjs/core";
 export const drawMarill = (scene: Scene) => {
   const Island = SceneLoader.ImportMesh(
     "",
-    import.meta.env.VITE_CDN_URL + "maill/",
+    import.meta.env.VITE_CDN_URL + "marill/",
     // import.meta.env.BASE_URL + "marill/",
     "scene.gltf",
     scene,
