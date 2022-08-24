@@ -2,7 +2,7 @@
 import "@babylonjs/loaders";
 import { ArcRotateCamera, Engine, Scene, Vector3 } from "@babylonjs/core";
 import { drawBlogTooltip } from "~/babylon/tooltip";
-import { drawIsland } from "~/babylon/island";
+import { drawIsland, drawWaterIsland } from "~/babylon/island";
 
 import * as GUI from "@babylonjs/gui";
 
@@ -19,8 +19,8 @@ onMounted(() => {
     "camera",
     2,
     0.9,
-    4,
-    new Vector3(0.5, 0.3, -1.2),
+    6,
+    new Vector3(0.5, -0.1, -1.2),
     scene
   );
   camera.attachControl(islandRef.value, true);
@@ -29,7 +29,8 @@ onMounted(() => {
   camera.wheelPrecision = 100;
   camera.useFramingBehavior = true;
 
-  drawIsland(scene, camera);
+  drawIsland(scene);
+  drawWaterIsland(scene);
   drawBlogTooltip(scene);
 
   scene.createDefaultEnvironment();
