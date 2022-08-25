@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import "@babylonjs/loaders";
 import { ArcRotateCamera, Engine, Scene, Vector3 } from "@babylonjs/core";
-import { drawBlogTooltip } from "~/babylon/tooltip";
+import { drawTooltip } from "~/babylon/tooltip";
 import { drawIsland, drawWaterIsland } from "~/babylon/island";
 import { drawMarill } from "~/babylon/marill";
 import { drawPikachu } from "~/babylon/Pikachu";
@@ -33,7 +33,12 @@ onMounted(() => {
 
   drawIsland(scene);
   drawWaterIsland(scene);
-  drawBlogTooltip(scene);
+
+  const blogTooltipPosition = new Vector3(-0.06, 0.625, -0.75);
+  drawTooltip(blogTooltipPosition, scene, "Blog");
+  const resumeTooltipPosition = new Vector3(-0.4, -0.1, 0.3);
+  drawTooltip(resumeTooltipPosition, scene, "CV");
+
   drawMarill(scene);
   drawPikachu(scene);
 

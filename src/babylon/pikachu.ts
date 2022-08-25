@@ -8,11 +8,10 @@ export const drawPikachu = (scene: Scene) => {
     "scene.gltf",
     scene,
     (meshes: AbstractMesh[]) => {
-      console.log(meshes);
       const rootMesh = meshes[0];
       rootMesh.scaling = new Vector3(0.005, 0.005, 0.005);
       rootMesh.rotation = new Vector3(Math.PI / 2, 0, 0);
-      rootMesh.position = new Vector3(-0.4, 0.14, 0.3);
+      rootMesh.position = new Vector3(-0.4, 0.14, 0.17);
     }
   );
 };
