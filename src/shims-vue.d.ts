@@ -11,3 +11,11 @@ declare module "*.md" {
   const Component: ComponentOptions;
   export default Component;
 }
+
+declare module "aos" {
+  export const install: PluginFunction<{}>;
+}
+
+declare module "animejs" {
+  export const install: PluginFunction<{}>;
+}

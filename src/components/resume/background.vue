@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useCommonStore } from "~/store/common";
+const store = useCommonStore();
+const { ChangeClientSize } = store;
+
 interface starType {
   range: string;
   width: string;
@@ -47,6 +51,10 @@ const paintStars = (stars: number, size: number) => {
 onMounted(() => {
   //   if (!skyRef.value || !backgroundRef.value) return;
   paintStars(starCount, 5);
+  ChangeClientSize({
+    clientWidth: clientWidth.value,
+    clientHeight: clientHeight.value,
+  });
 });
 </script>
 <template>
