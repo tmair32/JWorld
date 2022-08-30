@@ -1,45 +1,52 @@
 <script setup lang="ts">
 import anime from "animejs";
 
-const scrollDirection = ref(0); // 1: up, -1: down
-const waiting = ref(false); // Throttle Flag
-const scrollTrace = ref(0); // Previous Scroll Direction
-
-const scrollHandler = (e: WheelEvent) => {
-  if (!waiting.value) {
-    waiting.value = true; // throttle check
-
-    // Throttle 100ms
-    setTimeout(() => {
-      waiting.value = false;
-    }, 100);
-  }
-};
-
 const clientWidth = ref(0);
 const clientHeight = ref(0);
 
 const path = anime.path("path");
 
-onMounted(async () => {
-  document.addEventListener("mousewheel", scrollHandler);
+const getScrollPercent = () => {
+  const h = document.documentElement,
+    b = document.body,
+    st = "scrollTop",
+    sh = "scrollHeight";
+  return ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
+};
 
+onMounted(async () => {
   if (typeof window === "undefined") return;
   const ani = await import("animejs/lib/anime.es.js");
   const anime = ani.default;
   const path = anime.path(".meteor-path path");
-  console.log(path("x"));
-  console.log(path("y"));
 
-  anime({
+  const animation = anime({
     targets: ".meteor-path .meteor",
     translateX: path("x"),
     translateY: path("y"),
-    // rotate: path("angle"),
+    duration: 2000,
+    delay: (el, i) => i * 100,
     easing: "linear",
-    duration: 12000,
-    loop: true,
+    autoplay: false,
   });
+
+  const waiting = ref(false); // Throttle Flag
+  const scrollValue = ref(0); // Scroll Value
+
+  const scrollHandler = (e: WheelEvent) => {
+    if (!waiting.value) {
+      waiting.value = true; // throttle check
+      const percentage = getScrollPercent();
+      animation.seek(animation.duration * (percentage * 0.01));
+
+      // Throttle 100ms
+      setTimeout(() => {
+        waiting.value = false;
+      }, 100);
+    }
+  };
+
+  window.addEventListener("scroll", scrollHandler);
 });
 </script>
 <template>
@@ -48,6 +55,14 @@ onMounted(async () => {
     <meteor-path />
     <meteor />
   </div>
+  <div class="w-screen h-screen flex items-center justify-center">
+    <logo />
+  </div>
+  <div class="fake-height" />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.fake-height {
+  @apply relative w-full h-[1000vh];
+}
+</style>

@@ -41,6 +41,7 @@ defineProps({
     :width="width"
     :height="height"
     style="enable-background: new 0 0 512 512"
+    preserveAspectRatio="none"
   >
     <title :id="svgName">{{ svgName }}</title>
     <slot name="svgContent" />

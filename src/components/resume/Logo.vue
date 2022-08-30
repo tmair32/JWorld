@@ -34,7 +34,7 @@ const text = "world";
 
 <style lang="scss" scoped>
 .circle {
-  @apply relative w-200px h-200px rounded-full;
+  @apply fixed w-200px h-200px rounded-full;
   @apply flex justify-center items-center;
 }
 
@@ -45,7 +45,7 @@ const text = "world";
 
 .text {
   @apply absolute w-full h-full text-white;
-  animation: rotateText 5s linear infinite;
+  animation: rotateText 7s linear infinite;
 
   @keyframes rotateText {
     0% {

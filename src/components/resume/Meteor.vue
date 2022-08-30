@@ -28,4 +28,8 @@ import anime from "animejs/lib/anime.es.js";
   </svg-base>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.meteor {
+  @apply fixed;
+}
+</style>
