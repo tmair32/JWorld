@@ -118,4 +118,15 @@ export default defineConfig({
       "~/": `${resolve(__dirname, "src")}/`,
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        sourceMap: false,
+        additionalData(source: any, fp: any) {
+          if (fp.endsWith("variables.scss")) return source;
+          return `@import "~/assets/styles/_variables.scss"; ${source}`;
+        },
+      },
+    },
+  },
 });
