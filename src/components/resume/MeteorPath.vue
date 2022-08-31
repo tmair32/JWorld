@@ -22,7 +22,7 @@ const height = computed(() => {
 <template>
   <svg-base
     svg-name="meteor-path"
-    :svg-class="`absolute top-0 invisible`"
+    :svg-class="`hidden`"
     width="960"
     :height="height"
     :viewBox="`0 0 960 ${height}`"

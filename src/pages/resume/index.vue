@@ -4,8 +4,6 @@ import anime from "animejs";
 const clientWidth = ref(0);
 const clientHeight = ref(0);
 
-const path = anime.path("path");
-
 const getScrollPercent = () => {
   const h = document.documentElement,
     b = document.body,
@@ -14,8 +12,13 @@ const getScrollPercent = () => {
   return ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
 };
 
+onBeforeMount(() => {
+  window.scrollTo(0, 0);
+});
+
 onMounted(async () => {
   if (typeof window === "undefined") return;
+
   const ani = await import("animejs/lib/anime.es.js");
   const anime = ani.default;
   const path = anime.path(".meteor-path path");
@@ -24,8 +27,9 @@ onMounted(async () => {
     targets: ".meteor-path .meteor",
     translateX: path("x"),
     translateY: path("y"),
-    duration: 2000,
-    delay: (el, i) => i * 100,
+    duration: 5000,
+    delay: (el, i) => i * 500,
+    elasticity: 200,
     easing: "linear",
     autoplay: false,
   });
@@ -34,15 +38,15 @@ onMounted(async () => {
   const scrollValue = ref(0); // Scroll Value
 
   const scrollHandler = (e: WheelEvent) => {
+    const percentage = getScrollPercent();
     if (!waiting.value) {
       waiting.value = true; // throttle check
-      const percentage = getScrollPercent();
-      animation.seek(animation.duration * (percentage * 0.01));
+      animation.seek(animation.duration * (percentage * 0.02));
 
       // Throttle 100ms
       setTimeout(() => {
         waiting.value = false;
-      }, 100);
+      }, 50);
     }
   };
 
@@ -63,6 +67,10 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .fake-height {
-  @apply relative w-full h-[1000vh];
+  @apply relative w-full h-[500vh];
+}
+
+.meteor-path {
+  @apply fixed w-screen h-screen flex;
 }
 </style>
