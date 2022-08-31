@@ -46,7 +46,7 @@ const tooltipEvent = (mesh: AbstractMesh, scene: Scene, type: string) => {
     case "CV": {
       mesh.actionManager.registerAction(
         new ExecuteCodeAction(ActionManager.OnPickDownTrigger, () => {
-          location.href += "resume";
+          location.href = location.origin + "/JWorld/resume";
         })
       );
       break;

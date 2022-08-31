@@ -88,10 +88,10 @@ export default defineConfig({
       },
     }),
     Pages({
-      pagesDir: [
+      dirs: [
         {
           dir: "src/pages",
-          baseRoute: "/JWorld",
+          baseRoute: "/JWorld/",
         },
         {
           dir: "posts",
@@ -108,7 +108,9 @@ export default defineConfig({
         if (path.split(".").pop() == "md") {
           route.meta = Object.assign(route.meta || {}, { frontmatter: data });
         }
+        return route;
       },
+      routeStyle: "nuxt",
     }),
     vue(),
     WindiCSS(),

@@ -4,7 +4,7 @@ import anime from "animejs/lib/anime.es.js";
 <template>
   <svg-base
     svg-name="meteor"
-    svg-class="meteor mx-auto absolute top-[-50px]"
+    svg-class="meteor self-center"
     width="100"
     height="100"
     viewBox="0 0 512 512"

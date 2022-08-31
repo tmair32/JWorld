@@ -3,11 +3,15 @@ import { createPinia } from "pinia";
 import "virtual:windi.css";
 import "virtual:windi-devtools";
 import App from "./App.vue";
-import routes from "virtual:generated-pages";
+import autoRoutes from "virtual:generated-pages";
 import { RouterScrollBehavior } from "vue-router";
 
-import AOS from "aos";
-import "aos/dist/aos.css";
+const routes = autoRoutes.map((i) => {
+  return {
+    ...i,
+    alias: i.path.endsWith("/") ? `${i.path}index.html` : `${i.path}.html`,
+  };
+});
 
 const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) => {
   return { top: 0, behavior: "smooth" };
@@ -20,8 +24,6 @@ export const createApp = ViteSSG(App, { routes, scrollBehavior }, (ctx) => {
   Object.values(import.meta.glob("./module/*.ts", { eager: true })).map(
     (i: any) => i.install?.(ctx)
   );
-
-  AOS.init();
 
   const pinia = createPinia();
   ctx.app.use(pinia);

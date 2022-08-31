@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://tmair32.github.io/JWorld",
   "scripts": {
     "dev": "vite",
     "build": "cross-env NODE_ENV=production vite-ssg build",
@@ -26,7 +27,6 @@
     "@babylonjs/gui": "^5.19.0",
     "@babylonjs/loaders": "^5.19.0",
     "@types/animejs": "^3.1.5",
-    "@types/aos": "^3.0.4",
     "@types/node": "^18.7.6",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
@@ -36,7 +36,6 @@
     "@windicss/plugin-question-mark": "^0.1.1",
     "@yankeeinlondon/happy-wrapper": "^2.6.0",
     "animejs": "^3.2.1",
-    "aos": "3.0.0-beta.6",
     "cross-env": "^7.0.3",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
