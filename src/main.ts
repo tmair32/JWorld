@@ -10,8 +10,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) => {
-  if (savedPosition) return savedPosition;
-  else return { top: 0, behavior: "smooth" };
+  return { top: 0, behavior: "smooth" };
+
+  // if (savedPosition) return savedPosition;
+  // else return { top: 0, behavior: "smooth" };
 };
 
 export const createApp = ViteSSG(App, { routes, scrollBehavior }, (ctx) => {
