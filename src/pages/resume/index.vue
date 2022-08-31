@@ -34,20 +34,13 @@ onMounted(async () => {
     autoplay: false,
   });
 
-  const waiting = ref(false); // Throttle Flag
-  const scrollValue = ref(0); // Scroll Value
-
-  const scrollHandler = (e: WheelEvent) => {
+  const seek = () => {
     const percentage = getScrollPercent();
-    if (!waiting.value) {
-      waiting.value = true; // throttle check
-      animation.seek(animation.duration * (percentage * 0.02));
+    return animation.seek(animation.duration * (percentage * 0.02));
+  };
 
-      // Throttle 100ms
-      setTimeout(() => {
-        waiting.value = false;
-      }, 50);
-    }
+  const scrollHandler = () => {
+    window.requestAnimationFrame(() => seek());
   };
 
   window.addEventListener("scroll", scrollHandler);
