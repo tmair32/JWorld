@@ -13,8 +13,8 @@ const text = "world";
       <svg-base
         svg-name="logo"
         svg-class="mr-1"
-        :width="19.063"
-        :height="28.399"
+        :width="9.063"
+        :height="18.399"
         :viewBox="`0 0 39.063 48.399`"
         fill="#fff"
       >
@@ -30,7 +30,7 @@ const text = "world";
       <span
         v-for="(char, i) in text"
         :key="char"
-        :style="{ transform: `rotate(${i * 50}deg)` }"
+        :style="{ transform: `rotate(${i * 70}deg)` }"
       >
         {{ char }}
       </span>
@@ -40,29 +40,27 @@ const text = "world";
 
 <style lang="scss" scoped>
 .circle {
-  @apply fixed w-100px h-100px rounded-full;
+  @apply fixed w-60px h-60px rounded-full;
   @apply flex justify-center items-center;
 
   &:hover {
     .text {
-      animation-play-state: paused;
+      animation: rotateText 7s linear infinite;
     }
   }
 }
 
 .logo {
-  @apply absolute w-50px h-50px rounded-full text-center;
+  @apply absolute w-35px h-35px rounded-full text-center;
   @apply flex justify-center items-center;
 }
 
 .text {
   @apply absolute w-full h-full text-white;
 
-  animation: rotateText 7s linear infinite;
-
   span {
-    @apply absolute left-1/2 text-[1.2em];
-    transform-origin: 0 50px;
+    @apply absolute left-1/2 text-[1.0em];
+    transform-origin: 0 30px;
   }
 }
 
