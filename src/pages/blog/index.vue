@@ -1,7 +1,14 @@
+<script setup lang="ts"></script>
 <template>
-  <div></div>
+  <section class="blog">
+    <background />
+    <blog-nav />
+  </section>
 </template>
 
-<script setup lang="ts"></script>
-
-<style scoped></style>
+<style lang="scss" scoped>
+.blog {
+  @apply grid grid-cols-12;
+  @apply h-screen w-screen;
+}
+</style>

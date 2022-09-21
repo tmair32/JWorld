@@ -6,6 +6,11 @@ import App from "./App.vue";
 import autoRoutes from "virtual:generated-pages";
 import { RouterScrollBehavior } from "vue-router";
 
+import "~/assets/styles/_index.scss";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const routes = autoRoutes.map((i) => {
   return {
     ...i,

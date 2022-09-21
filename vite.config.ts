@@ -51,7 +51,7 @@ export default defineConfig({
           ],
         },
       ],
-      dts: true,
+      dts: "src/auto-imports.d.ts",
     }),
     Components({
       extensions: ["vue", "md"],

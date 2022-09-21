@@ -11,14 +11,14 @@ interface starType {
   top: string;
 }
 
-const backgroundRef: HTMLCanvasElement = ref();
-const skyRef: HTMLDivElement = ref();
+const backgroundRef = ref<HTMLCanvasElement | null>();
+const skyRef = ref<HTMLDivElement | null>();
 const starCount = 312;
 
-const clientWidth = computed(() => backgroundRef.value.clientWidth ?? 0);
-const clientHeight = computed(() => backgroundRef.value.clientHeight ?? 0);
+const clientWidth = computed(() => backgroundRef.value?.clientWidth ?? 0);
+const clientHeight = computed(() => backgroundRef.value?.clientHeight ?? 0);
 
-const stars = ref([]);
+const stars = ref<starType[]>([]);
 
 const randRange = () => Math.floor(Math.random() * 5) + 1;
 const random = (range: number, unit: string) => {
