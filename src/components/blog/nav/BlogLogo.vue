@@ -40,7 +40,7 @@ const text = "world";
 
 <style lang="scss" scoped>
 .circle {
-  @apply fixed w-60px h-60px rounded-full;
+  @apply justify-self-center w-60px h-60px rounded-full;
   @apply flex justify-center items-center;
 
   &:hover {

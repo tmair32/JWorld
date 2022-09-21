@@ -8,7 +8,7 @@ import { drawPikachu } from "~/babylon/Pikachu";
 
 import * as GUI from "@babylonjs/gui";
 
-const islandRef = ref<HTMLCanvasElement>(null);
+const islandRef = ref<HTMLCanvasElement | null>(null);
 
 onMounted(() => {
   const engine = new Engine(islandRef.value, true);
