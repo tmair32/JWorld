@@ -2,7 +2,8 @@
 import { useBlogStore } from "~/store/blog/blog";
 import { storeToRefs } from "pinia";
 const store = useBlogStore();
-const { title } = storeToRefs(store);
+const { toggleMenu } = store;
+const { menuStatus, title } = storeToRefs(store);
 
 const hoverLogo = ref(false);
 </script>
@@ -14,36 +15,36 @@ const hoverLogo = ref(false);
     </div>
     <div class="nav__icons">
       <div class="nav__icons-search" />
-      <div class="nav__icons-menu" />
+      <div class="nav__icons-menu">
+        <blog-menu-icon />
+      </div>
     </div>
   </nav>
 </template>
 
 <style lang="scss" scoped>
 .nav {
-  @apply grid grid-cols-12 grid-rows-1 items-center px-10 mt-5;
-  @apply col-span-12 h-14 z-120;
-  @apply text-white;
+  @apply col-span-full h-14 z-120;
+  @apply grid grid-rows-1 grid-cols-[min-content,auto,100px];
+  @apply items-center mx-5 mt-5;
+  @apply text-white cursor-pointer;
 
   &__title {
-    @apply col-start-2 col-end-12;
     @apply text-2xl font-bold;
     @apply flex items-center;
     @apply cursor-pointer;
     @apply transition-all duration-300 ease-in-out;
     @apply justify-center;
-
     &:hover {
       @apply text-gray-300;
     }
   }
 
   &__icons {
-    @apply col-start-12 col-end-13;
-    @apply grid grid-cols-2 items-center;
+    @apply grid grid-cols-2 gap-x-2 items-center;
     &-search {
       @apply col-span-1 w-40px h-40px;
-      @apply flex items-center;
+      @apply justify-self-center flex items-center;
       @apply justify-end cursor-pointer;
       background: url("~/assets/search.svg") no-repeat center;
       background-size: 30px;
@@ -53,44 +54,9 @@ const hoverLogo = ref(false);
         @apply transform scale-120;
       }
     }
-  }
-
-  &__icons-menu {
-    @apply col-span-1;
-    @apply transition-all translate-y-[15px] delay-0 duration-300;
-
-    &,
-    &::before,
-    &::after {
-      @apply w-40px h-5px bg-white;
-    }
-
-    &::before {
-      content: "";
-      @apply absolute left-0 bottom-15px;
-      transition: bottom 0.3s 0.3s cubic-bezier(0.23, 1, 0.32, 1),
-        transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    &::after {
-      content: "";
-      @apply absolute left-0 top-15px;
-      transition: top 0.3s 0.3s cubic-bezier(0.23, 1, 0.32, 1),
-        transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    &.active {
-      &::before {
-        @apply bottom-0 transform -rotate-45;
-        transition: bottom 0.3s cubic-bezier(0.23, 1, 0.32, 1),
-          transform 0.3s 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-      }
-
-      &::after {
-        @apply top-0 transform rotate-45;
-        transition: top 0.3s cubic-bezier(0.23, 1, 0.32, 1),
-          transform 0.3s 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-      }
+    &-menu {
+      @apply col-span-1 w-40px h-40px;
+      @apply cursor-pointer;
     }
   }
 }
