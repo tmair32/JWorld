@@ -1,8 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useBlogStore } from "~/store/blog/blog";
+import { storeToRefs } from "pinia";
+const store = useBlogStore();
+const { toggleMenu } = store;
+const { menuStatus } = storeToRefs(store);
+</script>
 <template>
   <div id="menu" class="menu">
     <div id="menu__button" class="menu__button">
-      <input id="menu_checkbox" class="menu__checkbox" type="checkbox" />
+      <input
+        id="menu_checkbox"
+        class="menu__checkbox"
+        type="checkbox"
+        @change="toggleMenu"
+      />
       <label id="menu_label" class="menu__label" for="menu_checkbox">
         <div id="menu_text_bar" class="menu__label__text-bar" />
       </label>
@@ -69,6 +80,20 @@
           shakeWhileMovingUp 0.8s ease 0.2s forwards,
           shakeWhileMovingDown 0.2s ease 0.8s forwards;
       }
+    }
+  }
+
+  &__checkbox:checked + .menu__label {
+    &:before {
+      @apply -left-40px;
+    }
+    &:after {
+      @apply left-40px;
+    }
+    .menu__label__text-bar:before {
+      animation: moveUpThenDown 0.8s ease 0.2s forwards,
+        shakeWhileMovingUp 0.8s ease 0.2s forwards,
+        shakeWhileMovingDown 0.2s ease 0.8s forwards;
     }
   }
 }

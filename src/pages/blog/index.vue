@@ -1,8 +1,9 @@
 <script setup lang="ts"></script>
 <template>
+  <background />
   <section class="blog">
-    <background />
     <blog-nav />
+    <blog-side />
   </section>
 </template>
 

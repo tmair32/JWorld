@@ -2,10 +2,7 @@
 import { useBlogStore } from "~/store/blog/blog";
 import { storeToRefs } from "pinia";
 const store = useBlogStore();
-const { toggleMenu } = store;
-const { menuStatus, title } = storeToRefs(store);
-
-const hoverLogo = ref(false);
+const { title } = storeToRefs(store);
 </script>
 <template>
   <nav class="nav">

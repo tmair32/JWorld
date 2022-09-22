@@ -6,7 +6,10 @@ export default defineConfig({
   extract: {
     include: ["index.html", "src/**/*.{vue, ts}"],
   },
-  plugins: [require("@windicss/plugin-question-mark")],
+  plugins: [
+    require("@windicss/plugin-question-mark"),
+    require("@windicss/plugin-scrollbar"),
+  ],
   theme: {
     extend: {
       colors: {
